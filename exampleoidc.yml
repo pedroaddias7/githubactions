@@ -1,0 +1,33 @@
+name: 'example oidc'
+on: [push]
+jobs:
+  run:
+    name: 'example to list bucket contents'
+    permissions:
+      id-token: write
+      contents: read
+    runs-on: 'ubuntu-latest'
+    
+    steps:
+
+    - uses: 'actions/checkout@v3'
+
+      # Configure Workload Identity Federation via a credentials file.
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+          workload_identity_provider: 'projects/366974812144/locations/global/workloadIdentityPools/k8s-pool/attribute.repository/pedroaddias7/githubactions'
+          service_account: 'git-k8s@gcloud-cd-playground-pdias.iam.gserviceaccount.com' # this is a SA email configured using the TF module with access to YOUR-GCS-BUCKET
+    
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v1'
+
+    # Now you can run gcloud commands authenticated as the impersonated service account.
+    - id: 'gcloud'
+      name: 'gcloud'
+      run: |-
+        gsutil ls
+        
+
+  
