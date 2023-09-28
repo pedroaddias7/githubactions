@@ -15,7 +15,7 @@ jobs:
       uses: 'google-github-actions/auth@v1'
       with:
           create_credentials_file: 'true'
-          workload_identity_provider: 'projects/366974812144/locations/global/workloadIdentityPools/k8s-pool/attribute.repository/pedroaddias7/githubactions'
+          workload_identity_provider: 'https://iam.googleapis.com/projects/366974812144/locations/global/workloadIdentityPools/k8s-pool/attribute.repository/pedroaddias7/githubactions'
           service_account: 'git-k8s@gcloud-cd-playground-pdias.iam.gserviceaccount.com'
     
     - id: 'gcloud'
