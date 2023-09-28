@@ -11,7 +11,7 @@ jobs:
     steps:
     - id: 'auth'
       name: 'Authenticate to GCP'
-      uses: 'google-github-actions/auth@1'
+      uses: 'google-github-actions/auth@v1'
       with:
           create_credentials_file: 'true'
           workload_identity_provider: projects/366974812144/locations/global/workloadIdentityPools/k8s-pool/attribute.repository/pedroaddias7/githubactions
