@@ -27,6 +27,9 @@ jobs:
     - id: 'gcloud'
       name: 'gcloud'
       run: |-
+        gcloud auth login --cred-file=${CI_PROJECT_DIR}/.gcp_temp_cred.json
+        gcloud auth list
+        gcloud compute instances list --project=my-mega-project
         gcloud secrets list
         
 
