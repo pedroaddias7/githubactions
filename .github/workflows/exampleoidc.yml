@@ -1,5 +1,6 @@
 name: 'example oidc'
-on: [push]
+on:
+  workflow_dispatch:
 jobs:
   run:
     name: 'example to list bucket contents'
