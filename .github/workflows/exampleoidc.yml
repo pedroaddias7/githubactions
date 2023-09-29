@@ -18,6 +18,7 @@ jobs:
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
       with:
+          token_format: "access_token"
           workload_identity_provider: projects/366974812144/locations/global/workloadIdentityPools/k8s-pool/attribute.repository/pedroaddias7/githubactions
           service_account: 'git-k8s@gcloud-cd-playground-pdias.iam.gserviceaccount.com' # this is a SA email configured using the TF module with access to YOUR-GCS-BUCKET
     
@@ -27,8 +28,6 @@ jobs:
     # Now you can run gcloud commands authenticated as the impersonated service account.
     - id: 'gcloud'
       name: 'gcloud'
-      run: |-
-        gcloud auth login --impersonate-service-account=git-k8s@gcloud-cd-playground-pdias.iam.gserviceaccount.com --no-browser --no-launch-browser
-        gcloud config set auth/impersonate_service_account git-k8s@gcloud-cd-playground-pdias.iam.gserviceaccount.com
-        gcloud auth lists 
-        gcloud secrets list
+      run: |
+        gcloud secrets list --impersonate-service-account=git-k8s@gcloud-cd-playground-pdias.iam.gserviceaccount.com
+        
