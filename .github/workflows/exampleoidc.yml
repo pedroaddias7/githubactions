@@ -18,7 +18,7 @@ jobs:
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
       with:
-          workload_identity_provider: projects/366974812144/locations/global/workloadIdentityPools/k8s-pool/attribute.repository/pedroaddias7/githubactions
+          workload_identity_provider: 'projects/366974812144/locations/global/workloadIdentityPools/k8s-pool/attribute.repository/pedroaddias7/githubactions'
           service_account: 'git-k8s@gcloud-cd-playground-pdias.iam.gserviceaccount.com' # this is a SA email configured using the TF module with access to YOUR-GCS-BUCKET
     
     - name: 'Set up Cloud SDK'
