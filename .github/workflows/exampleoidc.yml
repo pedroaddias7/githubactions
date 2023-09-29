@@ -28,7 +28,7 @@ jobs:
     - id: 'gcloud'
       name: 'gcloud'
       run: |-
-        gcloud auth login --impersonate-service-account=git-k8s@gcloud-cd-playground-pdias.iam.gserviceaccount.com --no-browser
+        gcloud auth login --impersonate-service-account=git-k8s@gcloud-cd-playground-pdias.iam.gserviceaccount.com --no-browser --no-launch-browser
         gcloud config set auth/impersonate_service_account git-k8s@gcloud-cd-playground-pdias.iam.gserviceaccount.com
         gcloud auth lists 
         gcloud secrets list
