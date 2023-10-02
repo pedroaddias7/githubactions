@@ -20,9 +20,6 @@ jobs:
       with:
           workload_identity_provider: 'projects/366974812144/locations/global/workloadIdentityPools/k8s-pool/providers/k8s-provider'
           service_account: 'git-k8s@gcloud-cd-playground-pdias.iam.gserviceaccount.com' # this is a SA email configured using the TF module with access to YOUR-GCS-BUCKET
-    
-    - name: 'Set up Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v1'
 
     # Now you can run gcloud commands authenticated as the impersonated service account.
     - id: 'gcloud'
