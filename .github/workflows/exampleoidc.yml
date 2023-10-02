@@ -10,22 +10,31 @@ jobs:
     runs-on: 'ubuntu-latest'
     
     steps:
-
-    - uses: 'actions/checkout@v3'
+    - name: "Checkout"
+      uses: 'actions/checkout@v3'
 
       # Configure Workload Identity Federation via a credentials file.
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
       with:
-          workload_identity_provider: 'projects/366974812144/locations/global/workloadIdentityPools/k8s-pool/providers/k8s-provider'
-          service_account: 'git-k8s@gcloud-cd-playground-pdias.iam.gserviceaccount.com' # this is a SA email configured using the TF module with access to YOUR-GCS-BUCKET
+          workload_identity_provider: "projects/366974812144/locations/global/workloadIdentityPools/pd-pool/providers/pd-provider"
+          service_account: "pdias-sa@gcloud-cd-playground-pdias.iam.gserviceaccount.com" # this is a SA email configured using the TF module with access to YOUR-GCS-BUCKET
+          token_format: "access_token"
+          access_token_lifetime: "120s"
     
-    - name: 'Set up Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v1'
+    - name: Echo stuff
+      run: printenv
+
+    - name: Setup GCloud SDK
+      uses: "google-github-actions/setup-gcloud@v1"
+      with:
+        version: ">= 363.0.0"
 
     # Now you can run gcloud commands authenticated as the impersonated service account.
-    - id: 'gcloud'
-      name: 'gcloud'
-      run: |
-        gcloud secrets list
+    - name: List Compute Networks
+      run: |-
+          echo "Displaying networks"
+          gcloud compute networks list
+          echo "Displaying subnets for my-awesome-vpc-network network"
+          gcloud compute networks subnets list --network my-awesome-vpc-network
